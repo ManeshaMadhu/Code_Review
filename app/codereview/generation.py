@@ -3,7 +3,7 @@ import os
 from groq import Groq
 
 # Set your Groq API key
-os.environ["GROQ_API_KEY"] = "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"
+os.environ["GROQ_API_KEY"] = KEY
 
 # Initialize Groq client
 import re
@@ -46,27 +46,3 @@ def generate(code_text):
 
     return responses
 
-
-
-# g = generate("""
-# class SignUp(models.Model):
-#     name = models.CharField(max_length=200)
-#     email = models.EmailField(max_length=200)
-#     password = models.CharField(max_length=100)
-#     ROLE_CHOICES = [
-#         ("I'm a Student", 'Student'),
-#         ("I'm a Teacher", 'Teacher'),
-#         ("I'm a Proffesional", 'Proffesional'),
-#     ]
-#     role = models.CharField(max_length=255, choices=ROLE_CHOICES, null=True, blank=True)
-
-#     def __str__(self):
-#         return self.name
-# """)
-# print(g[0])
-# print()
-# print()
-# print(g[1])
-# print()
-# print()
-# print(g[2])
