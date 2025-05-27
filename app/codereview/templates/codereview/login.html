@@ -1,0 +1,213 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: url("{% static 'codereview/img/image.jpg' %}") no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Dark Overlay */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Main Container */
+        .auth-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 80px;
+            border-radius: 10px;
+            width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        /* Left Section (Welcome) */
+        .auth-content {
+            width: 50%;
+            padding-right: 20px;
+            text-align: left;
+            
+        }
+
+        .auth-content h1 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .auth-content p {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons i {
+            font-size: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        /* Right Section (Login Form) */
+        .auth-form {
+            width: 50%;
+            text-align: center;
+        }
+
+        .auth-form h2 {
+            font-size: 24px;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Remember Me */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-right: 150px;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .remember-me input {
+            margin-left: 90px;
+            transform: scale(1.2);
+        }
+
+        /* Sign-in Button */
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #014b9a;
+        }
+
+        /* Links */
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .terms {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                width: 90%;
+            }
+            
+            .auth-content, .auth-form {
+                width: 100%;
+                text-align: center;
+                padding: 0;
+            }
+
+            .auth-content {
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="auth-container">
+            <!-- Left Section -->
+            <div class="auth-content">
+                <h1>Welcome Back</h1><br>
+                <p>"Let AI handle the errors, so you can focus on innovation."</p>
+                
+            </div>
+
+            <!-- Right Section -->
+            <div class="auth-form">
+                {% if error %}
+                    <p style="color: red; font-size: 14px; margin-bottom: 10px;">{{ error }}</p>
+                {% endif %}
+                <h2>Log in</h2>
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <input type="text" name="email" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember Me</label>
+                    </div>
+                    <button class="btn" type="submit">Log in now</button>
+                    <p class="forgot-password"><a href="#">Lost your password?</a></p>
+                </form>
+                <p>Don’t have an account? <a href="{% url 'signup' %}">Create account</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

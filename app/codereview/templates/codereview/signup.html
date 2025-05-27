@@ -1,0 +1,122 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: url("{% static 'codereview/img/image.jpg' %}") no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 60px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            color: white;
+        }
+
+        .auth-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .auth-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            font-size: 14px;
+            margin: 10px ;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .terms input {
+            margin: 0;
+            transform: scale(1.1);
+            
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #004a99;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="auth-container">
+            {% if error %}
+                <p style="color: red; text-align:center;">{{ error }}</p>
+            {% endif %}
+            <h2>Create Account</h2>
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="Full Name" name = "name" required>
+                <input type="email" placeholder="Email Address" name = "email" required>
+                <input type="password" placeholder="Password" name = "pass" required>
+                <input type="password" placeholder="Confirm Password" name = "con_pass" required>
+                <div class="terms">
+                    <input type="checkbox" id="agree" required>
+                    <label for="agree">I agree to the <a href="terms.html">Terms & Conditions</a></label>
+                </div>
+                <button class="btn" type="submit"> Create Account</button>
+            </form>
+            <br><br><p>Already Have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>

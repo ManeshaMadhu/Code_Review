@@ -1,0 +1,367 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Review</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .hero {
+            background: url("{% static 'codereview/img/image.jpg' %}") no-repeat center center/cover;
+            color: white;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .features, .contact {
+            background: #f4f4f4;
+            color: black;
+        }
+
+        .about {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            color: white;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150%;
+    height: 65%;
+    margin: auto;
+    padding: 20px;
+    background-color: rgb(24, 17, 17); /* Light gray background */
+    border-radius: 10px; /* Optional: Adds rounded corners */
+    color: white;
+  }
+
+  .about-text {
+    flex: 1;
+    text-align: left;
+  }
+
+  .about-image {
+    flex: 0.4;
+    text-align: right;
+  }
+
+  .about-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+  .feature-container {
+            width: 150%;
+            height: 65%;
+            background-color: black; /* Black background */
+            color: white; /* White text */
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-container img {
+            max-width: 400px; /* Adjust image size */
+            border-radius: 10px;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h3 {
+            margin-top: 0;
+        }
+
+        .feature-text ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-text ul li {
+            margin: 10px 0;
+        }
+
+        .feature-text ul li::before {
+            content: "🔹"; /* Bullet point */
+            margin-right: 8px;
+        }
+
+        .try-now-btn {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .try-now-btn:hover {
+            background-color: darkblue;
+        }
+        .footer {
+            background: #111;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer h2 {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: white;
+        }
+        .social-icons {
+            margin: 15px 0;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            width: 40px;
+            height: 40px;
+            background: #222;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+        .social-icons a:hover {
+            background: orange;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 20px;
+        }
+        .links ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .links ul li {
+            margin: 8px 0;
+        }
+        .links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .links ul li a:hover {
+            color: orange;
+        }
+        .copyright {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+        .designer {
+            color: orange;
+            text-decoration: none;
+        }
+        .size {
+            font-size: 45px;
+        }
+        .size1 {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Code With AI</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="codereview/login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1 class="size">AI Code Review & Optimization</h1>
+            <p class="size1">An AI-powered platform that simplifies code review and optimization—from analysis to deployment. Review, refine, and enhance your code effortlessly with our tool.</p>
+            <a href="codereview/signup.html" class="btn">Sign Up</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-text">
+              <h2>THE ART AND SCIENCE OF AI-BASED CODE REVIEW</h2>
+              <p>AI-based code review and optimization streamline software development by automating bug detection, improving code efficiency, and ensuring adherence to best practices.</p>
+              
+              <h3>🚀 Evolution of AI in Code Review</h3>
+              <p>AI-driven code review tools have transformed software development by analyzing code quality, detecting vulnerabilities, and offering suggestions for better performance.</p>
+          
+              <h3>⚡ Intelligent Optimization</h3>
+              <p>Modern AI-powered tools utilize machine learning models to refactor code, remove redundancies, and improve execution time while maintaining readability and efficiency.</p>
+          
+              <h3>🧠 Future of AI in Development</h3>
+              <p>As AI continues to evolve, it will play a crucial role in predictive analysis, automated debugging, and real-time suggestions, making development faster and more secure.</p>
+            </div>
+          
+            <div class="about-image">
+              <img src="{% static 'codereview/img/image2.png' %}" alt="AI Code Review">
+            </div>
+          </div>
+    </section>
+
+    <section id="features">
+        <div class="feature-container">
+            <img src="{% static 'codereview/img/lang.png' %}" alt="AI Code Review">
+            <div class="feature-text">
+                <h3>🚀 Features of "Code With AI"</h3>
+                <ul>
+                    <li><b>AI-Powered Code Review</b> - Analyze and review code for best practices, performance, and security vulnerabilities.</li>
+                    <li><b>Automated Code Optimization</b> - AI-driven refactoring to improve code efficiency, remove redundancies, and enhance readability.</li>
+                    <li><b>Real-Time Error Detection</b> - Detect syntax errors, logic flaws, and runtime issues instantly while coding.</li>
+                    <li><b>Deployment-Ready Code Suggestions</b> - Get AI-powered recommendations to ensure clean, optimized, and production-ready code.</li>
+                    <li><b>Multi-Language Support</b> - Works seamlessly with Python, JavaScript, Java, C++, and more.</li>
+                </ul>
+                <a href="codereview/signup.html"><button class="try-now-btn">Try Now</button></a>
+                <p><b>✨ "Better code, fewer bugs, smarter development." ✨</b></p>
+            </div>
+        </div>
+    
+    </section>
+    <footer id="contact" class="footer">
+        <h2>Contact Us</h2>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-skype"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        
+        <div class="links">
+            <ul>
+                <li><b>Quick Links</b></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="codereview/privacy.html">Privacy Policy</a></li>
+            </ul>
+            <ul>
+                <li><b>Contact</b></li>
+                <li>Email: contact@codewithAI.com</li>
+                <li>Phone: +123 456 7890</li>
+                <li>Address: Banglore, India</li>
+            </ul>
+        </div>
+
+        <div class="copyright">
+            © 2025 Copyright <b>Code with AI</b>. All Rights Reserved  
+            <br> Designed by <a href="#" class="designer">Team Code with AI</a>
+        </div>
+    </footer>
+</body>
+</html>
